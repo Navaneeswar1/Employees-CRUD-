@@ -1,0 +1,70 @@
+﻿@model assignment1.Models.Employee
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEdit", "Employee", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+
+    @Html.HiddenFor(model => model.EmployeeID)
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Designation, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Designation)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DOJ, new { @class = "control-label" })
+        @Html.EditorFor(model => model.DOJ, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+    </div>
+
+
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.Salary, new { @class = "control-label" })
+        <div class="input-group">
+            <span class="input-group-addon">$</span>
+            @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Gender", new { @class = "control-label" })
+        <div>
+            @Html.RadioButtonFor(model => model.Gender, "Male") Male
+            @Html.RadioButtonFor(model => model.Gender, "Female") Female
+        </div>
+        @Html.ValidationMessageFor(model => model.Gender)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("State", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.State, new SelectList(new[]
+        {
+            new { Value = "", Text = "Select State" },
+            new { Value = "AP", Text = "AP" },
+            new { Value = "TELANGANA", Text = "TELANGANA" },
+            new { Value = "KARNATAKA", Text = "KARNATAKA" },
+            new { Value = "TAMILNADU", Text = "TAMILNADU" }
+        }, "Value", "Text"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.State)
+    </div>
+
+
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="reset" value="Reset" class="btn" />
+    </div>
+
+
+}
